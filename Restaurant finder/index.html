@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta name="author" content="restaurant finder">
+	<meta name="description" content="Restaurants Nearby is a restaurant finder of a location with details about the services.">
+	<meta name="keywords" content="restaurant, food, hotel, fast-food, eat-out">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Restaurants Nearby-Find a place to feed your hunger</title>
+	<link rel="stylesheet" href="vendor/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+	<script src="vendor/jquery-2.2.2.js"></script>
+	<script src="vendor/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/style.css"/>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsXU-otu2LuLOdxuRowIBeUhj3_p9thrI&libraries=places&callback=initMap" async defer></script>
+	<script src="js/script.js"></script>
+	</head>
+<body>
+<header>
+	<p>Restaurants Nearby</p>
+	<h2>Find a place to feed your hunger</h2>
+	</header>
+	<nav class="nav navbar-inverse">
+  <div class="navi">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="index.html">Restaurants Nearby</a>
+    </div>
+	<div class="collapse navbar-collapse" id="myNav">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">Home</a></li>
+		<li><a href="register.html">Register</a></li>
+		<li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </div>
+	</div>
+</nav>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Feeling hungry?</h1> 
+    <p>Looking for nearest eat out place?</p>
+	<p>No need to wait more</p>
+  </div>
+	<h4>Just enter the location and check out restaurant with best services</h4> 
+	<h4>Scroll through the results and select your place to feed your hunger..</h4>
+<section>
+<form class="form-responsive" role="form" name="search" method="get" action="#">	  
+	<div class="form-group" id="locationField">
+      <label class="control-label" name="name">Enter Location:</label>
+		 <input type="text" required autocomplete="on" onkeypress="onPlaceChanged()" class="form-control" id="autocomplete" maxlength="50" placeholder="Enter location"/>
+		<button type="button" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-search"> Search</span></button>
+	</div>
+		</form>
+
+<div id="map"></div>
+<div id="view">
+<h4 id="msg" style="display:none">Click on a restaurant for details:</h4>
+<div id="listing">
+  <table id="resultsTable">
+	  <tbody id="results"></tbody>
+  </table>
+</div>
+
+  <div id="mainTable">
+    <table>
+		<tr id="rName" class="rRow">
+        <th class="info">Name:</th>
+        <td id="name"></td>
+      </tr>
+      <tr id="rAddress" class="rRow">
+        <th class="info">Address:</th>
+        <td id="address"></td>
+      </tr>
+      <tr id="rPhone" class="rRow">
+        <th class="info">Telephone:</th>
+        <td id="phone"></td>
+      </tr>
+      <tr id="rRating" class="rRow">
+        <th class="info">Rating:</th>
+        <td id="rating"></td>
+      </tr>
+      <tr id="rWebsite" class="rRow">
+		  <th class="info">Website:</th>
+        <td id="website"></td>
+      </tr>
+    </table>
+  </div>
+	</div>
+	
+<div style="display: none">
+  <div id="info-content">
+    <table>
+      <tr id="iw-url-row" class="iw_table_row">
+        <td id="iw-icon" class="iw_table_icon"></td>
+        <td id="iw-url"></td>
+      </tr>
+      <tr id="iw-address-row" class="iw_table_row">
+        <td class="iw_attribute_name">Address:</td>
+        <td id="iw-address"></td>
+      </tr>
+      <tr id="iw-phone-row" class="iw_table_row">
+        <td class="iw_attribute_name">Telephone:</td>
+        <td id="iw-phone"></td>
+      </tr>
+      <tr id="iw-rating-row" class="iw_table_row">
+        <td class="iw_attribute_name">Rating:</td>
+        <td id="iw-rating"></td>
+      </tr>
+      <tr id="iw-website-row" class="iw_table_row">
+        <td class="iw_attribute_name">Website:</td>
+        <td id="iw-website"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+</section>
+<div id="connect">
+				<a href="http://facebook.com/RestaurantsNearby" target="_blank" class="facebook"></a>
+				<a href="http://twitter.com/RestaurantsNearby" target="_blank" class="twitter"></a>
+				<a href="http://plus.google.com/RestaurantsNearby" target="_blank" class="googleplus"></a>
+				<a href="http://instagram.com/RestaurantsNearby" target="_blank" class="instagram"></a>
+				<a href="http://youtube.com/RestaurantsNearby" target="_blank" class="youtube"></a>
+				</div>
+</div>
+<footer>
+<div class="copy"><span class="glyphicon glyphicon-copyright-mark"></span> Restaurants Nearby. All Rights Reserved</div>
+	</footer>
+</body>
+</html>
