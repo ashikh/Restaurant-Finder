@@ -203,4 +203,21 @@ function buildIWContent(place) {
     document.getElementById('iw-website-row').style.display = 'none';
 	document.getElementById('rWebsite').style.display = 'none';
   }
+if (place.opening_hours.weekday_text) {
+    
+	document.getElementById('rOpening').style.display = '';
+	document.getElementById('opening').textContent = '';
+	var open = document.getElementById('opening');
+	for (var i = 0; i < place.opening_hours.weekday_text.length; i++) {
+    
+	var time = document.createElement('div');
+    
+	time.innerHTML = place.opening_hours.weekday_text[i];
+	
+	open.appendChild(time);
+            }
+  } else {
+	document.getElementById('rOpening').style.display = 'none';
+  }
+	
 }
