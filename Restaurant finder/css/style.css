@@ -1,7 +1,13 @@
 body {
 height: auto;
+background-image:url(../images/food_back_white.png);
+}
+@media screen and (min-width:600px){body {
+height: auto;
 background-image:url(../images/food_back.png);
 }
+}
+
 @font-face {
   font-family: 'myWebFont';
   src: url(../font/Lobster-Regular.ttf);
@@ -21,6 +27,7 @@ background-image:url(../images/food_back.png);
 header>p{
 	font-size: 48px;
 	color: orangered;
+	text-shadow: 2px 4px 4px black;
 }
 		nav{
 			width: 90%;
@@ -87,6 +94,7 @@ table {
   border: 2px solid black;
   border-radius: 10px;
   padding: 10px;
+  box-shadow: 5px 2px 5px grey;
 }
 button{
 	margin: 10px;
