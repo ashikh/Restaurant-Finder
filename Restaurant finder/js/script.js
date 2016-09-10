@@ -4,14 +4,66 @@ var autocomplete;
 var countryRestrict = {'country': 'in'};
 var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green';
 var hostnameRegexp = new RegExp('^https?://.+?/');
-
+//latitude and longitude values of various places 
 var countries = {
+  'au': {
+    center: {lat: -25.3, lng: 133.8},
+    zoom: 4
+  },
+  'br': {
+    center: {lat: -14.2, lng: -51.9},
+    zoom: 3
+  },
+  'ca': {
+    center: {lat: 62, lng: -110.0},
+    zoom: 3
+  },
+  'fr': {
+    center: {lat: 46.2, lng: 2.2},
+    zoom: 5
+  },
+  'de': {
+    center: {lat: 51.2, lng: 10.4},
+    zoom: 5
+  },
   'in': {
     center: {lat: 20.6, lng: 78.9},
     zoom: 5
+  },
+  'mx': {
+    center: {lat: 23.6, lng: -102.5},
+    zoom: 4
+  },
+  'nz': {
+    center: {lat: -40.9, lng: 174.9},
+    zoom: 5
+  },
+  'it': {
+    center: {lat: 41.9, lng: 12.6},
+    zoom: 5
+  },
+  'za': {
+    center: {lat: -30.6, lng: 22.9},
+    zoom: 5
+  },
+  'es': {
+    center: {lat: 40.5, lng: -3.7},
+    zoom: 5
+  },
+  'pt': {
+    center: {lat: 39.4, lng: -8.2},
+    zoom: 6
+  },
+  'us': {
+    center: {lat: 37.1, lng: -95.7},
+    zoom: 3
+  },
+  'uk': {
+    center: {lat: 54.8, lng: -4.6},
+    zoom: 5
   }
 };
-
+//initialize map on home page
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: countries['in'].zoom,
@@ -21,11 +73,11 @@ function initMap() {
     zoomControl: true,
     streetViewControl: false
   });
-
+//display search results in table
   infoWindow = new google.maps.InfoWindow({
     content: document.getElementById('info-content')
   });
-  
+// autocomplete places while entering the input 
   autocomplete = new google.maps.places.Autocomplete(
       (
           document.getElementById('autocomplete')), {
@@ -37,7 +89,7 @@ function initMap() {
   autocomplete.addListener('place_changed', onPlaceChanged);
 
   document.getElementById('country').addEventListener(
-      'change', resetPlace);
+      'change', setAutocompleteCountry);
 }
 
 function onPlaceChanged() {
@@ -50,7 +102,7 @@ function onPlaceChanged() {
     document.getElementById('autocomplete').placeholder = 'Enter location';
   }
 }
-
+//search place type
 function search() {
   var search = {
     bounds: map.getBounds(),
@@ -78,7 +130,7 @@ function search() {
   });
 document.getElementById('msg').style.display = 'block';
 }
-
+//display table with results
 function showTable(){
 document.getElementById('mainTable').style.display = 'inline-block';
 }
@@ -92,7 +144,18 @@ function clearMarkers() {
   markers = [];
 }
 
-function resetPlace() {
+//initial latitude and longitude values for all places
+function setAutocompleteCountry() {
+  var country = document.getElementById('country').value;
+  if (country == 'all') {
+    autocomplete.setComponentRestrictions([]);
+    map.setCenter({lat: 15, lng: 0});
+    map.setZoom(2);
+  } else {
+    autocomplete.setComponentRestrictions({'country': country});
+    map.setCenter(countries[country].center);
+    map.setZoom(countries[country].zoom);
+  }
   clearResults();
   clearMarkers();
 }
@@ -102,14 +165,14 @@ function dropMarker(i) {
     markers[i].setMap(map);
   };
 }
-
+//characteristics of different details
 function addResult(result, i) {
   var results = document.getElementById('results');
   var markerLetter = String.fromCharCode('A'.charCodeAt(0) + i);
   var markerIcon = MARKER_PATH + markerLetter + '.png';
 
   var tr = document.createElement('tr');
-  tr.style.backgroundColor = (i % 2 === 0 ? '#00bfff' : '#ffffff');
+  tr.style.backgroundColor = (i % 2 === 0 ? '#ff6347' : '#ffffff');
   tr.onclick = function() {
     google.maps.event.trigger(markers[i], 'click');
   };
@@ -143,13 +206,13 @@ function showInfoWindow() {
         if (status !== google.maps.places.PlacesServiceStatus.OK) {
           return;
         }
-        infoWindow.open(map, marker);
+        infoWindow.close(map, marker);
         buildIWContent(place);
       });
 }
-
+//display icon and restaurant name
 function buildIWContent(place) {
-  document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
       'src="' + place.icon + '"/>';
   document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
       '">' + place.name + '</a></b>';
@@ -158,6 +221,7 @@ function buildIWContent(place) {
   document.getElementById('iw-address').textContent = place.vicinity;
   document.getElementById('address').textContent = place.vicinity;
 
+//display contact number
   if (place.formatted_phone_number) {
     document.getElementById('iw-phone-row').style.display = '';
 	document.getElementById('rPhone').style.display = '';
@@ -170,6 +234,7 @@ function buildIWContent(place) {
 	document.getElementById('rPhone').style.display = 'none';
   }
 
+//display restaurant rating
   if (place.rating) {
     var ratingHtml = '';
     for (var i = 0; i < 5; i++) {
@@ -188,6 +253,7 @@ function buildIWContent(place) {
 	document.getElementById('rRating').style.display = 'none';
   }
 
+//	display restaurant website
   if (place.website) {
     var fullUrl = place.website;
     var website = hostnameRegexp.exec(place.website);
@@ -203,6 +269,8 @@ function buildIWContent(place) {
     document.getElementById('iw-website-row').style.display = 'none';
 	document.getElementById('rWebsite').style.display = 'none';
   }
+	
+//display working hours	
 if (place.opening_hours.weekday_text) {
     
 	document.getElementById('rOpening').style.display = '';
@@ -218,6 +286,5 @@ if (place.opening_hours.weekday_text) {
             }
   } else {
 	document.getElementById('rOpening').style.display = 'none';
-  }
-	
+  }		
 }
