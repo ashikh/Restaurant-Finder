@@ -266,14 +266,40 @@ div.img{
     cursor: pointer;
 	z-index: 9;
 }
-
+#revpic{
+	width: 250px;
+	height: 700px;
+}
+img.pic{
+	width:235px;
+	height: 200px;
+	margin: 20px;
+}
+.Rbtn{
+	position: fixed;
+	right: 60px;
+	top: 293px;
+}
+.rbtn{
+		display: none;
+	}
+a:link, a:visited, a:hover, a:active{
+	text-decoration: none;
+	color: white;
+}
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){
     .modal-content {
         width: 100%;
     }
 }
-
+/*Reviews table*/
+#review{
+	position: absolute;
+	max-width: 800px;
+	left: 280px;
+	top: 330px;
+}
 #locationMap{
 	min-width:100%;
 	min-height: 300px;
@@ -289,6 +315,10 @@ footer{
 	padding: 15px;
 	bottom: 0;
 	margin-top: 20px;
+}
+#footer{
+	position: absolute;
+	top: 1500px;
 }
 #policy a{
 	text-align: center;
@@ -339,7 +369,7 @@ header>h2{
 footer{
 		height: 175px;
 	}
-#connect{
+#connect, .imgDesc{
 		display: none;
 	}
 #map{
@@ -348,11 +378,27 @@ footer{
 table{
 		width: 280px;
 	}
-.imgDesc{
-		display: none;
-	}
 .carousel-inner > .item > img {
     width: 100%;
 	height:300px;
         }
+.Rbtn{
+	display: block;
+	position: absolute;
+}
+#review{
+	width: 300px;
+	position: absolute;
+	display: block;
+	left: 0;
+	top: 1530px;
+}
+.modal-content{
+	width: 90%;
+	font-size: 16px;
+	}
+#footer{
+		position: absolute;
+		top: 3200px;
+	}
 }
