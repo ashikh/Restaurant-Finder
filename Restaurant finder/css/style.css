@@ -280,9 +280,6 @@ img.pic{
 	right: 60px;
 	top: 293px;
 }
-.rbtn{
-		display: none;
-	}
 a:link, a:visited, a:hover, a:active{
 	text-decoration: none;
 	color: white;
